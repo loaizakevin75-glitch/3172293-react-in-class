@@ -1,56 +1,69 @@
+/* semantics.css representa roles globales de la interfaz, */
+
+/*Si quieres cambiar el color del texto primario, hazlo únicamente AQUí en semantic: */
+
 :root {
-   /*===========Light Them===========*/
-    /*===========Brand===========*/
-    --semantyc-brand: var(--color-prmary-800);
-    --semantyc-brand-hover: var(--color-prmary-950);
-    /*Tono mas alto que el brand*/
-    --semantyc-brand-soft: var(--color-prmary-200);
-    --semantyc-brand-soft-hover: var(--color-prmary-350);
-    /*Background*/
-    --semantyc-background: var(--color--white);
-    --semantyc-surface: var(--color-gray-400);
-    /*Containers*/
-    --semantyc-surface-muted: var(--color-gray-200);
-    /*Menos importancia*/
-    --semantyc-surface-inverse: var(--color-black);
 
-    /*=========TEXT===========*/
-    --semantyc-text-primary: var(--color-gray-900); /*Color Principal de lectura, titulos, texto base del documento*/
-    /*Dominantes*/
-    --semantyc-text-secundary: var(--color-gray-700);/*Texto menos dominante*/
-    /*Ejemplo*/
-    --semantyc-text-muted: var(--color-gray-500); /*Texto deshabilitado por ejemplo*/
-    /*Ejemplo*/
-    --semantyc-text-inverse: var(--color--white); /*Texto invertido*/
+    /* ============== LIGHT THEME ============== */
 
-    /*========Border=========*/
-    --semantyc-border: var(--color-gray-400); /**Border principal de todos los componentes*/
-    --semantyc-border-strong: var(--color-gray-700); /*Bordes mas fuertes*/
+    /* =======BRAND====== */
 
-    /*===========Focus============*/
-    --semantyc-focus-ring: var(--color-primary-700);
+    --semantic-brand: var(--color-primary-800);
+    --semantic-brand-hover: var(--color-primary-950);/* Generalmente es de un tono mas alto que el brand*/
+    --semantic-brand-soft: var(--color-primary-200);
+    --semantic-brand-soft-hover: var(--color-primary-350);
 
-    /*===========State============*/
-    --semantyc-succes: var(--color-primary-950);
-    --semantyc-warning: var(--color-tertiary-950);
-    --semantyc-error: var(--color-secondary-950);
+    /* ======BACKGROUND======= */
 
-    /*===========Typografhy============*/
-    --semantyc-font-size-display: var(--fs-xxl);  /*Texto de alto impacto, texto protagonista, hero, numeros grandes*/
-    --semantyc-font-size-h1: var(--fs-lg);
-    --semantyc-font-size-h2: var(--fs-md);
-    --semantyc-font-size-h3: var(--fs-sm);
-    --semantyc-font-size-body: var(--fs-xs);
-    --semantyc-font-size-medium: var(--fs-xxs);
-    --semantyc-font-size-small: var(--fs-xxxs);
-    --semantyc-font-size-caption: var(--fs-xxxxs); /*Caption es texto auxiliar muy pequeño.*/
+    --semantic-background: var(--color-white);  /* Fondo de toda la aplicación*/
+    --semantic-surface: var(--color-gray-400);  /* Fondo de modales, cards, containers*/
+    --semantic-surface-muted: var(--color-gray-200); /*Zonas secundarias, con menos importancia*/
+    --semantic-background-inverse: var(--color-gray-800);
+
+    /* ======= TEXT =======  */
+
+    --semantic-text-primary: var(--color-gray-900);    /*Color principal de lectura, títulos, texto base del documento*/
+    --semantic-text-secondary: var(--color-gray-700);  /*Textos menos dominantes*/
+    --semantic-text-muted: var(--color-gray-500);  /*Texto deshabilitado por ejemplo*/
+    --semantic-text-inverse: var(--color-white); /*Texto invertido*/
+
+    /* ======= BORDER =======*/
+
+    --semantic-border: var(--color-gray-400);  /*Borde principal de todos los componentes*/
+    --semantic-border-strong: var(--color-gray-700);   /*Bordes más fuertes*/
+
+    /* ======= FOCUS ====== */
+
+    --semantic-focus-ring: var(--color-primary-700);
     
-    /*===========Font-wheight============*/
-    --semantyc-font-weight-heading: var(--font-weight-bold);
-    --semantyc-font-weight-boddy: var(--font-weight-regular);
-    --semantyc-font-weight-label: var(--font-weight-regular);
+    /* ======= STATE ======= */
 
-    /*=======================================================================*/
-    /* Ya no dependemos de nombres de color, Dependemos de intención*/
-    /*=======================================================================*/
+    --semantic-success: var(--color-primary-950);
+    --semantic-warning: var(--color-tertiary-950);
+    --semantic-error: var(--color-secondary-950);
+
+    /* ======= TYPOGRAPHY =======*/
+
+    --semantic-font-size-display: var(--fs-xxl); /* Texto de alto impacto, texto protagonista, hero, números grandes*/
+    --semantic-font-size-h1: var(--fs-lg);
+    --semantic-font-size-h2: var(--fs-md);
+    --semantic-font-size-h3: var(--fs-sm);
+    --semantic-font-size-body: var(--fs-xs);
+    --semantic-font-size-medium: var(--fs-xxs);
+    --semantic-font-size-small: var(--fs-xxxs);
+    --semantic-font-size-caption: var(--fs-xxxxs);    /* Caption es texto auxiliar muy pequeño.*/
+
+
+    /* ======= FONT WEIGHT ======= */
+
+    --semantic-font-weight-heading: var(--font-weight-bold);
+    --semantic-font-weight-body: var(--font-weight-regular);
+    --semantic-font-weight-label: var(--font-weight-regular);
+
+    
+    /* ============================================= */
+    /**      YA NO DEPENDEMOS DE NOMBRES DE COLOR,   
+    DEPENDEMOS ES DE INTENCIÓN
+    /* ============================================= */
 }
+/* ============== DARK THEME ============== */

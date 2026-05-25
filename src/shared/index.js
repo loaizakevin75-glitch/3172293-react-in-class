@@ -1,6 +1,7 @@
 // Layouts
 export { default as AuthLayout } from "./layouts/AuthLayout";
-export {default as DashboardLayout} from "./layouts/DashboardLayout";
+export { default as DashboardLayout } from "./layouts/DashboardLayout";
 
-//Components
-export { default as Input} from "./components/Input"
+// Componentes
+export { default as Input } from "./components/Input";
+export { default as Button } from "./components/Button";
