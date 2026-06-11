@@ -1,8 +1,28 @@
+import {  useState, useEffect} from "react"
+
+
 import { Outlet } from "react-router-dom";
 import authBg from "@/assets/images/bg-1.png";
-import { Input, Button, DeleteCounter2 } from "@/shared";
+import { 
+  Input, 
+  Button, 
+  // DeleteCounter, 
+  Select, 
+  Checkbox 
+} 
+  from "@/shared";
+import { getDocumentTypes} from "../../services/selectService";
+
 
 export default function AuthLayout() {
+
+  //Estado para los tipos de documentos
+  const [documentTypes, setDocumentTypes] = useState([])
+
+  //Uso del estado useEffect
+  useEffect(() => {
+    getDocumentTypes.apply().then(setDocumentTypes);
+  },[])
   return (
     <>
       <div 
@@ -68,12 +88,30 @@ export default function AuthLayout() {
           </div> {/*Actions */}
 
           {/*Implementación del estado useState */}
-          <div className="mt-10">
+          {/* <div className="mt-10">
             <h1>ejemplo sin useState</h1>
-            <DeleteCounter2 />
-          </div>
+            <DeleteCounter />
+          </div> */}
 
           {/* <h1>Hola que tal</h1> */}
+
+          {/* Implementación de useEffect */}
+          {/* <div className="mt12">
+            <h1>Este es mi useEffect</h1>
+            <EffectDemo/>
+          </div> */}
+
+          {/* <CounterEffect/> */}
+
+          <Select 
+            label="Tipos de documento"
+            name="userDocumentTypes"
+            htmlFor="userDocumentTypes"
+            options={documentTypes}
+          />
+
+          
+
         <Outlet />
       </main>
       </div>
