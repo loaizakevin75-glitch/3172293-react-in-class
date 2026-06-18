@@ -1,5 +1,6 @@
 export default function Input({
     label,
+    error,
     htmlFor,
     type = "text",
     variant= "primary",
@@ -50,6 +51,7 @@ export default function Input({
                           ? "mb-0"
                           : "mb-1"
                     }
+                    ${error ? "text-red-800" : "text-caption"}
                 `}
         >
           {label}
@@ -97,10 +99,15 @@ export default function Input({
                     focus:ring-brand
                     ${variants[variant]}
                     ${sizes[size]}
-                `}
+                    ${error ? "border-red-800" : "border border-border"}
+                  `}
             {...props}
           />
         </div>
+        {/* Feedback */}
+        {error && (
+          <p className="text-caption text-red-800 place-self-start">{error}</p>
+        )}
       </div>
     );
 }

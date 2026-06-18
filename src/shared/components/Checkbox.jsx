@@ -5,7 +5,7 @@ export default function Checkbox({
     checked = false,    // Estado controlado del checkbox
     onChange,           // función que maneja el cambio de estado
     disabled = false,   // Indica si el checkbox esta habilitado
-    className = "",     // Clases adicionales para personalización
+    className = " ",     // Clases adicionales para personalización
 }) {
 
     return (

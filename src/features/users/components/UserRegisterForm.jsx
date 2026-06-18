@@ -1,10 +1,22 @@
 //UserRegisterForm componente para registrar un usuario
 
 import {useState, useEffect} from "react"
-import {Input, Select, Checkbox, Button} from "@/shared";
+import {Input, Select, Checkbox, Button, IconButton} from "@/shared";
 import { getDocumentTypes} from "@/services/selectService";
+import { useNavigate } from "react-router-dom";
+import { userSchema } from "../schemas/userSchemas";
+
 
 export default function UserRegisterForm (){
+
+    //Estado
+
+    //Navegación
+    const Navigate = useNavigate();
+
+    //Estado del error
+    const [errors, setErrors] = useState({})
+
         //Estado del formulario
     const [formData, setFormData] = useState({
         userName: "",
@@ -37,16 +49,9 @@ export default function UserRegisterForm (){
             //Se utiliza unicamente lo que cambió
             [name]: type === "checkbox" ? checked : value,
         }));
+
     };
-
-      //Estado para los tipos de documentos
-      const [documentTypes, setDocumentTypes] = useState([])
-    
-      //Uso del estado useEffect
-      useEffect(() => {
-        getDocumentTypes.apply().then(setDocumentTypes);
-      },[])
-
+ 
       // ==========Handle Submit====================
       const handleSubmit = async (e) => {
         //Evita que el formulario recargue la página
@@ -77,95 +82,187 @@ export default function UserRegisterForm (){
             //Cortamos la ejecucion: No se envia nada al backend
             
             return;
-
-            //Si la validacion pasa, limpiamos errores previos
-            setErrors({});
+            
         }
-      }
+        //Si la validacion pasa, limpiamos errores previos
+        setErrors({});
 
+        //Activamos estado de envio (util para deshabilitar el boton )
+        // setIsSubmitting(true);
+
+        try{
+            //LLamamos al servicio frontend que consume la API
+            //result.data contiene los datos ya validados por zod
+            // const response = await createUser(result.data);
+
+            // Log informativo para desarrollo
+            // console.log("Usuario creado:", response);
+
+            //Feddback básico  al usuario
+            alert("Usuario creado correctamente");
+
+            //Navegamos a la vista anterior
+            //navigate(-1) equivale a "volver atras"
+            // Navigate(-1);
+        } catch (error) {
+            //Capturamos errores de red oerrores lanzados por el servicio
+            console.error("error:", error.message);
+
+            //Mostramos el mensaje de error al usuario
+            alert(error.message);
+        } finally {
+            // Pase lo que pase, desactivamos el estado de envio
+            // setIsSubmitting(false);
+        }  
+    };
+
+    //===========================================
+    //        Handle namechange
+    //===========================================
+
+    //   const handleNameChange = (e) => {
+    //     const value = e.target.value.trim();
+
+    //     if (value === "") {
+    //         console.log("El nombre no puede estar vacio")
+    //     }
+    //   };
+
+      
+
+      //Estado para los tipos de documentos
+      const [documentTypes, setDocumentTypes] = useState([])
+    
+      //Uso del estado useEffect
+      useEffect(() => {
+        getDocumentTypes().then(setDocumentTypes);
+      },[])
+
+   
     return (
-        <div>
-            <Input 
-                label="Nombre"
-                type="text"
-                placeholder="Escribe tu nombre" 
-                htmlFor="user-name"     
-                variant="primary"        
-                size="sm"        
-            />      
-            <Input 
-                label="Correo"
-                type="email"
-                placeholder="Escribe tu correo" 
-                htmlFor="user-email"             
-            />      
-            <Input 
-                label="Teléfono"
-                type="tel"
-                placeholder="Escribe tu número de teléfono" 
-                htmlFor="user-phone"             
-            />  
-            <Select 
-                label="Tipos de documento"
-                name="userDocumentTypes"
-                htmlFor="userDocumentTypes"
-                options={documentTypes}
-            />    
-             <Input 
-                label="Documento"
-                type="text"
-                placeholder="Escribe tu número de documento" 
-                htmlFor="user-document-number"             
-            />
-             <Input 
-                label="Contraseña"
-                type="ássword"
-                placeholder="Escribe tu contraseña" 
-                htmlFor="user-password"             
-            />
-
-            {/*Checkbox */}
-            <Checkbox
-                id="isSuperUser"
-                name="isSuperUser"
-                label="Es super usuario"
-                Checked={FormData.isSuperUser}
-                onChange={handleChange}
-            />
-            <Checkbox
-                id="isStaff"
-                name="isStaff"
-                label="Es staff"
-                Checked={FormData.isStaff}
-                onChange={handleChange}
-            />
-            <Checkbox
-                id="isActive"
-                name="isActive"
-                label="Está activo"
-                Checked={FormData.isActive}
-                onChange={handleChange}
-            />
-
-            {/* Actions */}
-          <div className="flex gap-6 items-center">
-            <Button
-              variant="secondary"
-              size="sm"
-              type="button"  
-              onClick={() => console.log("Se oprimió el cancelar")}          
+        <div className="grid items-center justify-center">
+            <h1 className="mx-auto my-12 text-title font-bold">registro de usuarios</h1>
+            {/* // formulario */}
+            <form 
+                action=""
+                onSubmit={handleSubmit}
             >
-              Cancelar
-            </Button> 
-            <Button
-              variant="primary"
-              size="md"
-              type="submit"  
-              onClick={() => console.log("Se oprimió el submit")}          
-            >
-              Guardar
-            </Button> 
-          </div> {/*Actions */}
+                <Input 
+                    label="Nombre"
+                    name="userName"
+                    type="text"
+                    value={formData.userName}
+                    placeholder="Escribe tu nombre" 
+                    htmlFor="user-name" 
+                    onChange={handleChange} 
+                    error={errors.userName}  
+                />      
+                <Input 
+                    label="Correo"
+                    name="userEmail"
+                    type="email"
+                    value={formData.userEmail}
+                    placeholder="Escribe tu correo" 
+                    htmlFor="user-email" 
+                    onChange={handleChange}
+                    error={errors.userEmail}           
+                />      
+                <Input 
+                    label="Teléfono"
+                    name="userPhone"
+                    type="tel"
+                    value={formData.userPhone}
+                    placeholder="Escribe tu número de teléfono" 
+                    htmlFor="user-phone"  
+                    onChange={handleChange}
+                    error={errors.userPhone}           
+                />  
+                <Select 
+                    label="Tipos de documento"
+                    name="userDocumentTypes"
+                    value={formData.userDocumentTypes}
+                    htmlFor="userDocumentTypes"
+                    options={documentTypes}
+                    onChange={handleChange}
+                    error={errors.userDocumentTypes}
+                />    
+                <Input 
+                    label="Documento"
+                    name="userDocumentNumber"
+                    type="text"
+                    value={formData.userDocumentNumber}
+                    placeholder="Escribe tu número de documento" 
+                    htmlFor="user-document-number" 
+                    onChange={handleChange}
+                    error={errors.userDocumentNumber}            
+                />
+                <Input 
+                    label="Contraseña"
+                    name="userPassword"
+                    type="password"
+                    value={formData.userPassword}
+                    placeholder="Escribe tu contraseña" 
+                    htmlFor="user-password" 
+                    onChange={handleChange}
+                    error={errors.userPassword}            
+                />
+
+                <div className="grid gap-4 my-8 ">
+                    {/*Checkbox */}
+                    <Checkbox
+                        id="isSuperUser"
+                        name="isSuperUser"
+                        label="Es super usuario"
+                        checked={formData.isSuperUser}
+                        onChange={handleChange}
+                    />
+                    <Checkbox
+                        id="isStaff"
+                        name="isStaff"
+                        label="Es staff"
+                        checked={formData.isStaff}
+                        onChange={handleChange}
+                    />
+                    <Checkbox
+                        id="isActive"
+                        name="isActive"
+                        label="Está activo"
+                        checked={formData.isActive}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                
+
+                {/* Actions */}
+                <div className="flex gap-6 items-center">
+                    <Button
+                        variant="secondary"
+                        size="sm"
+                        type="button"  
+                        onClick={() => console.log("Se oprimió el cancelar")}          
+                    >
+                    Cancelar
+                    </Button> 
+                        <Button
+                            variant="primary"
+                            size="md"
+                            type="submit"  
+                            onClick={() => console.log("Se oprimió el submit")}          
+                        >
+                        Guardar
+                    </Button> 
+
+                    <IconButton
+                        variant="primary"
+                        onCLick={() => Navigate(-1)}
+                    >
+
+                        {/* <SquareCode/> */}
+                    </IconButton>
+                </div> {/*Actions */}
+            </form>
+        
         </div>
     )
 }
